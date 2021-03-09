@@ -1,0 +1,12 @@
+# File Manager
+DS_Store
+.vscode
+tmp/
+
+# Build Directories
+_build
+.merlin
+/bin
+
+# Vagrant Configuration
+.vagrant/
