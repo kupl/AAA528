@@ -274,12 +274,12 @@ module Stmt = struct
     (* flatten function end *)
   end
 
-  let to_string : t -> string
+  let to_string : ?indent:int -> t -> string
   = let open Core in
-    fun s -> begin
+    fun ?(indent=0) s -> begin
     (* to_string function start *)
     let rec inner_to_string : ?depth:int -> t -> string (* inner function of to_string *)
-    = fun ?(depth=1) s -> begin
+    = fun ?(depth=indent+1) s -> begin
       (* inner_to_string function start *)
       let its = inner_to_string ~depth in (* syntax sugar *)
       let its_deep = inner_to_string ~depth:(depth + 1) in (* syntax sugar *)
@@ -380,17 +380,19 @@ module Pgm = struct
     (* create function end *)
   end
   
-  let to_string : t -> string
+  let to_string : ?indent:int -> t -> string
   = let open Core in
-    fun { pre; post; rank; typ; id; args; locals; stmt } -> begin
+    fun ?(indent=0) { pre; post; rank; typ; id; args; locals; stmt } -> begin
     (* to_string function start *)
-    (pre |> Inv.to_string) ^ "\n" ^
-    (post |> Inv.to_string) ^ "\n" ^
-    (if (rank |> Option.is_some) then ((rank |> Option.value ~default:[] |> Rank.to_string) ^ "\n") else "") ^
-    (typ |> Ty.to_string) ^ " " ^ id ^ " (" ^ (args |> List.map ~f:Decl.to_string |> String.concat ~sep:", ") ^ ") {\n" ^
-    "\t// locals: (" ^ (locals |> List.map ~f:Decl.to_string |> String.concat ~sep:", ") ^ ")\n" ^
-    (stmt |> Stmt.to_string) ^ "\n" ^
-    "}\n"
+    let tb = char_of_int 9 in (* \t *)
+    let idt = String.make indent tb in (* \t * depth *)
+    idt ^ (pre |> Inv.to_string) ^ "\n" ^
+    idt ^ (post |> Inv.to_string) ^ "\n" ^
+    idt ^ (if (rank |> Option.is_some) then ((rank |> Option.value ~default:[] |> Rank.to_string) ^ "\n") else "") ^
+    idt ^ (typ |> Ty.to_string) ^ " " ^ id ^ " (" ^ (args |> List.map ~f:Decl.to_string |> String.concat ~sep:", ") ^ ") {\n" ^
+    idt ^ "\t// locals: (" ^ (locals |> List.map ~f:Decl.to_string |> String.concat ~sep:", ") ^ ")\n" ^
+    (stmt |> Stmt.to_string ~indent:(indent+1)) ^ "\n" ^
+    idt ^ "}"
     (* to_String function end *)
   end
 end
@@ -425,11 +427,11 @@ let string_of_inv : Inv.t -> string
 let string_of_rank : Rank.t -> string
 = Rank.to_string
 
-let string_of_stmt : Stmt.t -> string
+let string_of_stmt : ?indent:int -> Stmt.t -> string
 = Stmt.to_string
 
 let string_of_decl : Decl.t -> string
 = Decl.to_string
 
-let string_of_pgm : Pgm.t -> string
+let string_of_pgm : ?indent:int -> Pgm.t -> string
 = Pgm.to_string

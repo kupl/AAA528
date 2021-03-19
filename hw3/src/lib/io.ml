@@ -26,6 +26,7 @@ module Input = struct
     fun () -> begin
     (* read function start *)
     let args = Args.read () in
+    if args.printArg then Log.info (fun m -> m "%s" (Args.to_string ())) else ();
     Log.info (fun m -> m "Read File from %s." args.inputFile);
     let in_c = Stdlib.open_in args.inputFile in
     let lexbuf = Lexing.from_channel in_c in
@@ -33,6 +34,7 @@ module Input = struct
       Log.info (fun m -> m "Start Parsing File.");
       let res = Parser.start Lexer.next_token lexbuf in
       Log.info (fun m -> m "Parsing File is Done.");
+      if args.printAdt then Log.info (fun m -> m "Input Program.\n%s" (res |> Adt.string_of_pgm ~indent:1)) else ();
       close_in in_c; Timer.create (args.totalTimeout); res
     with
     | Lexer.LexingError msg -> (

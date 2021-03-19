@@ -29,6 +29,12 @@ module Setting = struct
   let total : bool Stdlib.ref
   = Stdlib.ref false
 
+  (* FLAG - print data *)
+  let printArg : bool Stdlib.ref
+  = Stdlib.ref false
+  let printAdt : bool Stdlib.ref
+  = Stdlib.ref false
+
   let speclist : (Arg.key * Arg.spec * Arg.doc) list
   = [
     ("--input",         (Arg.String (fun s -> inputFile := s)), 
@@ -42,7 +48,11 @@ module Setting = struct
     ("--partial",       (Arg.Unit (fun () -> total := false; partial := true)), 
                         "Flag for partial correctness verification");
     ("--total",         (Arg.Unit (fun () -> partial := false; total := true)), 
-                        "Flag for total correctness verification");]
+                        "Flag for total correctness verification");
+    ("--print-arg",     (Arg.Set printArg),
+                        "Print out arguments of this process");
+    ("--print-adt",     (Arg.Set printAdt),
+                        "Print out ADT form of input program");]
   
   let anon_fun : string -> unit
   = fun s -> begin
@@ -90,6 +100,8 @@ type t = {
   totalTimeout: int;
   partial: bool;
   total: bool;
+  printArg: bool;
+  printAdt: bool;
 }
 
 let create : unit -> unit
@@ -111,18 +123,22 @@ let read : unit -> t
     z3Timeout=(!z3Timeout);
     totalTimeout=(!totalTimeout);
     partial=(!partial);
-    total=(!total); }
+    total=(!total);
+    printArg=(!printArg);
+    printAdt=(!printAdt); }
   (* read function end *)
 end
 
 let to_string : unit -> string
 = fun () -> begin
   let args = read () in
-  "Current Option:\n" ^
+  "Current Arguments.\n" ^
   "\t- Input File: " ^ args.inputFile ^ "\n" ^
   "\t- Verbose: " ^ (args.verbose |> string_of_bool) ^ "\n" ^
   "\t- Z3 Timebudget: " ^ (args.z3Timeout |> string_of_int) ^ "\n" ^
   "\t- Total Timebudget: " ^ (args.totalTimeout |> string_of_int) ^ "\n" ^
   "\t- Partial Flag: " ^ (args.partial |> string_of_bool) ^ "\n" ^
-  "\t- Total Flag: " ^ (args.total |> string_of_bool)
+  "\t- Total Flag: " ^ (args.total |> string_of_bool) ^ "\n" ^
+  "\t- Print Arguments Flag: " ^ (args.printArg |> string_of_bool) ^ "\n" ^
+  "\t- Print ADT Flag: " ^ (args.printAdt |> string_of_bool)
 end

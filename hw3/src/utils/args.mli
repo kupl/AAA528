@@ -18,6 +18,9 @@ module Setting : sig
   (* FLAG - verification mode flag *)
   val partial : bool Stdlib.ref
   val total : bool Stdlib.ref
+  (* FLAG - print data *)
+  val printArg : bool Stdlib.ref
+  val printAdt : bool Stdlib.ref
 
   val speclist : (Arg.key * Arg.spec * Arg.doc) list
   val anon_fun : string -> unit
@@ -40,6 +43,8 @@ type t = {
   totalTimeout: int;
   partial: bool;
   total: bool;
+  printArg: bool;
+  printAdt: bool;
 }
 
 val create : unit -> unit

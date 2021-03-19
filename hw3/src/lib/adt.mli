@@ -131,7 +131,7 @@ module Stmt : sig
     | S_break
 
   val flatten : t -> t
-  val to_string : t -> string
+  val to_string : ?indent:int -> t -> string
 end
 
 
@@ -179,7 +179,7 @@ module Pgm : sig
                -> args:Decl.t list 
                -> locals:Decl.t list 
                -> t
-  val to_string : t -> string
+  val to_string : ?indent:int -> t -> string
 end
 
 
@@ -198,6 +198,6 @@ val string_of_lv : Expr.var -> string
 val string_of_fmla : Fmla.t -> string
 val string_of_inv : Inv.t -> string
 val string_of_rank : Rank.t -> string
-val string_of_stmt : Stmt.t -> string
+val string_of_stmt : ?indent:int -> Stmt.t -> string
 val string_of_decl : Decl.t -> string
-val string_of_pgm : Pgm.t -> string
+val string_of_pgm : ?indent:int -> Pgm.t -> string
