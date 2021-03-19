@@ -43,3 +43,27 @@ module Input = struct
   let to_string : t -> string
   = Adt.string_of_pgm (* alias *)
 end
+
+
+(******************************************************************************)
+(******************************************************************************)
+(* Output                                                                     *)
+(******************************************************************************)
+(******************************************************************************)
+
+module Output = struct
+  type t = Smt.Solver.validity
+
+  exception Error
+
+  let read : t -> unit
+  = fun result -> begin
+    (* read function start *)
+    let args = Utils.Args.read () in
+    match (result, args.partial) with
+    | Smt.Valid, true   -> print_endline ("Proved that the program is partially correct w.r.t. the pre/post conditions.")
+    | Smt.Valid, false  -> print_endline ("Proved that the program always terminates.")
+    | Smt.Invalid       -> print_endline ("Failed to verify the program.")      
+    (* read function end *)
+  end
+end
