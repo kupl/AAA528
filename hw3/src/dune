@@ -4,5 +4,6 @@
   (libraries
     aaa528_hw3.lib
     aaa528_hw3.utils
+    aaa528_hw3.hw3
   )
   (package aaa528_hw3))
