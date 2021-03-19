@@ -4,11 +4,11 @@ let main : unit -> unit
 = fun () -> begin
   (* main function start *)
   (* 1. Read Input File *)
-  let c = Libs.Io.Input.read () in
+  let c = Lib.Io.Input.read () in
   (* 2. Run Verifier*)
   let v = Hw3.verify c in
   (* 3. Print Result *)
-  Libs.Io.Output.read v
+  Lib.Io.Output.read v
   (* main function end *)
 end
 

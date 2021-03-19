@@ -10,8 +10,9 @@
 (******************************************************************************)
 (******************************************************************************)
 
-let verify : Libs.Io.Input.t -> Libs.Io.Output.t
-= fun c -> begin
+let verify : Lib.Io.Input.t -> Lib.Io.Output.t
+= let open Lib in
+  fun c -> begin
   (* verify function start *)
 
   (* TODO *)
@@ -19,8 +20,8 @@ let verify : Libs.Io.Input.t -> Libs.Io.Output.t
   (********************************************)
   (*************** Example Code ***************)
   let _ = c in
-  let f = Libs.Smt.Expr.true_ () in
-  let v, _ = Libs.Smt.Solver.check_validity [f] in
+  let f = Smt.Expr.true_ () in
+  let v, _ = Smt.Solver.check_validity [f] in
   v
   (*************** Example Code ***************)
   (********************************************)
