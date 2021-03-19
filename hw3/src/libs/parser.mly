@@ -55,8 +55,8 @@
 %token EOF
 
 (* Token - Other Symbol *)
-%token IMPLY IFF AND OR
-%token LE GE LT GT EQ NEQ NOT
+%token FNOT IMPLY IFF AND OR
+%token LE GE LT GT EQ NEQ ENOT
 %token PLUS MINUS STAR SLASH
 %token ASSIGN
 
@@ -69,12 +69,13 @@
 
 (* Priority *)
 %right  DOT
+%right  FNOT
 %right  IMPLY IFF
+%right  ENOT
 %left   OR AND
 %left   EQ NEQ LT GT LE GE
 %left   PLUS MINUS
 %left   STAR SLASH
-%right  NOT
 
 (* Type of Pattern *)
 %type   <Ty.t>          typ ttyp
@@ -127,7 +128,7 @@ exp:
   | e1=exp SLASH e2=exp                   { Expr.E_div (e1, e2) }
   | MINUS e1=exp                          { Expr.E_neg e1 }
   | MID l1=lv MID                         { Expr.E_len l1 }
-  | NOT e1=exp                            { Expr.E_not e1 }
+  | ENOT e1=exp                           { Expr.E_not e1 }
   | e1=exp EQ e2=exp                      { Expr.E_eq (e1, e2) }
   | e1=exp NEQ e2=exp                     { Expr.E_neq (e1, e2) }
   | e1=exp LT e2=exp                      { Expr.E_lt (e1, e2) }
@@ -150,6 +151,7 @@ lv:
 fmla:
   | LPAREN f1=fmla RPAREN                 { f1 }
   | e1=exp                                { Fmla.F_exp e1 }
+  | FNOT f1=fmla                          { Fmla.F_not f1 }
   | f1=fmla AND f2=fmla                   { Fmla.F_and [f1; f2] |> Fmla.flatten }
   | f1=fmla OR f2=fmla                    { Fmla.F_or [f1; f2]  |> Fmla.flatten }
   | f1=fmla IMPLY f2=fmla                 { Fmla.F_imply (f1, f2) }

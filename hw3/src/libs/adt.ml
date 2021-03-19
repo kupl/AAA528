@@ -113,6 +113,7 @@ end
 module Fmla = struct
   type t =
     | F_exp     of Expr.t
+    | F_not     of t
     | F_and     of t list
     | F_or      of t list
     | F_imply   of t * t
@@ -160,6 +161,7 @@ module Fmla = struct
     fun f -> begin
     (* flatten function start *)
     match f with
+    | F_not     f1        -> F_not    (f1 |> flt)
     | F_and     fl1       -> F_and    (fl1 |> List.fold_left 
                                                 ~init:[]
                                                 ~f:(fun acc f1 -> f1 |> flt |> function F_and fl2 -> acc@fl2 | f2 -> acc@[f2]))
@@ -181,6 +183,7 @@ module Fmla = struct
     (* to_string function start *)
     match f with
     | F_exp     e1        -> (e1 |> Expr.to_string)
+    | F_not     f1        -> "~(" ^ (f1 |> ts) ^ ")"
     | F_and     fl1       -> "(" ^ (fl1 |> List.map ~f:ts |> String.concat ~sep:" && ") ^ ")"
     | F_or      fl1       -> "(" ^ (fl1 |> List.map ~f:ts |> String.concat ~sep:" || ") ^ ")"
     | F_imply   (f1, f2)  -> "(" ^ (f1 |> ts) ^ " -> "  ^ (f2 |> ts) ^ ")"

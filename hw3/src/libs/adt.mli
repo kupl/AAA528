@@ -69,6 +69,7 @@ end
 module Fmla : sig
   type t =
     | F_exp     of Expr.t
+    | F_not     of t
     | F_and     of t list
     | F_or      of t list
     | F_imply   of t * t

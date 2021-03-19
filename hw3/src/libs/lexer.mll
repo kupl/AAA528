@@ -73,6 +73,7 @@ rule next_token = parse
   | ','                   { COMMA }
   | '.'                   { DOT }
   | '|'                   { MID }
+  | '~'                   { FNOT }
   | "->"                  { IMPLY }
   | "<->"                 { IFF }
   | "&&"                  { AND }
@@ -83,7 +84,7 @@ rule next_token = parse
   | '>'                   { GT }
   | "=="                  { EQ }
   | "!="                  { NEQ }
-  | '!'                   { NOT }
+  | '!'                   { ENOT }
   | '+'                   { PLUS }
   | '-'                   { MINUS }
   | '*'                   { STAR }
