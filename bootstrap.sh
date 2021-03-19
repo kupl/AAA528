@@ -47,7 +47,8 @@ echo "[NOTE] End-up Initialize OPAM"
 
 # Setup OCAML Dependencies
 echo "[NOTE] Start Setup OCAML Dependencies"
-for pkg in "batteries 2.9.0" "core 0.14.0" "dune 2.4.0" "menhir 20200624" "logs 0.7.0" "mtime 1.2.0"; do
+eval $(opam env)
+for pkg in "batteries 2.9.0" "core 0.14.0" "dune 2.4.0" "menhir 20200624" "zarith 1.10" "logs 0.7.0" "mtime 1.2.0"; do
   pkg_pair=( $pkg )
   pkg_name=${pkg_pair[0]}
   pkg_version=${pkg_pair[1]}
@@ -57,6 +58,7 @@ done
 echo "[NOTE] End-up Setup OCAML Dependencies"
 
 # Install Z3
+eval $(opam env)
 if [[ ! -d "${OPAM_LIB_DIR%%/}/z3" ]]; then
   echo "[NOTE] Start Install Z3"
   curl -L -o z3-$Z3_VERSION.tar.gz https://github.com/Z3Prover/z3/archive/z3-$Z3_VERSION.tar.gz >/dev/null 2>&1 && \
