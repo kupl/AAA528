@@ -24,5 +24,9 @@ end
 (******************************************************************************)
 
 module Output : sig
-  
+  type t = Smt.Solver.validity
+
+  exception Error
+
+  val read : t -> unit
 end

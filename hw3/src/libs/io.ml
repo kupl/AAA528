@@ -57,13 +57,14 @@ module Output = struct
   exception Error
 
   let read : t -> unit
-  = fun result -> begin
+  = let open Smt.Solver in
+    fun result -> begin
     (* read function start *)
     let args = Utils.Args.read () in
     match (result, args.partial) with
-    | Smt.Valid, true   -> print_endline ("Proved that the program is partially correct w.r.t. the pre/post conditions.")
-    | Smt.Valid, false  -> print_endline ("Proved that the program always terminates.")
-    | Smt.Invalid       -> print_endline ("Failed to verify the program.")      
+    | VAL, true   -> print_endline ("Proved that the program is partially correct w.r.t. the pre/post conditions.")
+    | VAL, false  -> print_endline ("Proved that the program always terminates.")
+    | _           -> print_endline ("Failed to verify the program.")      
     (* read function end *)
   end
 end
