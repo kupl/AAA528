@@ -2,4 +2,5 @@
   (name utils)
   (public_name aaa528_hw3.utils)
   (libraries
+    unix
   ))
