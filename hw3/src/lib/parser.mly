@@ -1,4 +1,6 @@
 %{
+  module Lib = struct end
+  
   open Adt
 
   let locals = Stdlib.ref []
