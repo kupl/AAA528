@@ -47,7 +47,7 @@ echo "[NOTE] End-up Initialize OPAM"
 
 # Setup OCAML Dependencies
 echo "[NOTE] Start Setup OCAML Dependencies"
-for pkg in "batteries 2.9.0" "core 0.14.0" "dune 2.4.0" "menhir 20200624" "ocamlgraph 1.8.8" "ptime 0.8.5" "yojson 1.7.0" "zarith 1.10"; do
+for pkg in "batteries 2.9.0" "core 0.14.0" "dune 2.4.0" "menhir 20200624" "logs 0.7.0" "mtime 1.2.0"; do
   pkg_pair=( $pkg )
   pkg_name=${pkg_pair[0]}
   pkg_version=${pkg_pair[1]}

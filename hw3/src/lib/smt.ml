@@ -501,25 +501,35 @@ module Solver = struct
 
 
   let check_satisfiability : Fmla.t list -> (satisfiability * Model.t option)
-  =fun fl1 -> begin
+  = let open Utils in
+    fun fl1 -> begin
     (* check_satisfiability function start *)
+    Log.info (fun m -> m "Create Solver.");
     let solver = _create () in
-    match Z3.Solver.check solver fl1 with
-    | UNKNOWN ->        (UNKNOWN, None)
-    | UNSATISFIABLE ->  (UNSAT,   None)
-    | SATISFIABLE ->    (SAT,     (solver |> Z3.Solver.get_model))
+    Log.info (fun m -> m "Start Solver to Check Satisfiability.");
+    let res : satisfiability * Model.t option
+    = (match Z3.Solver.check solver fl1 with
+              | UNKNOWN ->        (UNKNOWN, None)
+              | UNSATISFIABLE ->  (UNSAT,   None)
+              | SATISFIABLE ->    (SAT,     (solver |> Z3.Solver.get_model))) in
+    Log.info (fun m -> m "Checking Satisfiability is Done."); res
     (* check_satisfiability function end *)
   end
 
   let check_validity : Fmla.t list -> (validity * Model.t option)
-  =fun fl1 -> begin
+  = let open Utils in
+    fun fl1 -> begin
     (* check_validity function start *)
+    Log.info (fun m -> m "Create Solver.");
     let solver = _create () in
     let fmla = fl1 |> Fmla.create_and |> Fmla.create_not in
-    match Z3.Solver.check solver [fmla] with
-    | UNKNOWN ->        (UNKNOWN, None)
-    | UNSATISFIABLE ->  (VAL,     None)
-    | SATISFIABLE ->    (INVAL,   (solver |> Z3.Solver.get_model))
+    Log.info (fun m -> m "Start Solver to Check Validity.");
+    let res : validity * Model.t option
+    = (match Z3.Solver.check solver [fmla] with
+      | UNKNOWN ->        (UNKNOWN, None)
+      | UNSATISFIABLE ->  (VAL,     None)
+      | SATISFIABLE ->    (INVAL,   (solver |> Z3.Solver.get_model))) in
+    Log.info (fun m -> m "Checking Validity is Done."); res
     (* check_validity function end *)
   end
 
@@ -575,7 +585,7 @@ module Solver = struct
   end
 
   let string_of_satisfiability : satisfiability -> string
-  =fun s -> begin
+  = fun s -> begin
     (* string_of_satisfiability function start *)
     match s with
     | UNKNOWN -> "UNKNOWN"
@@ -585,7 +595,7 @@ module Solver = struct
   end
 
   let string_of_validity : validity -> string
-  =fun s -> begin
+  = fun s -> begin
     (* string_of_validity function start *)
     match s with
     | UNKNOWN -> "UNKNOWN"

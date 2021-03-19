@@ -1,22 +1,27 @@
 (* Main Entrance Function of HW3 *)
 
 let main : unit -> unit
-= fun () -> begin
+= let open Lib in
+  let open Utils in
+  fun () -> begin
   (* main function start *)
   (* 1. Read Input File *)
-  let c = Lib.Io.Input.read () in
+  let c = Io.Input.read () in
   (* 2. Run Verifier*)
   let v = Hw3.verify c in
   (* 3. Print Result *)
-  Lib.Io.Output.read v
+  Io.Output.read v;
+  Log.info (fun m -> m "Done.");
+  ()
   (* main function end *)
 end
 
 let _ = begin
   Utils.Args.create ();
+  Utils.Log.create ();
   Printexc.record_backtrace true;
   try
     main ()
   with
-  | exc -> prerr_endline (Printexc.to_string exc)
+  | exc -> Utils.Log.err (fun m -> m "%s" (exc |> Printexc.to_string))
 end
