@@ -1,0 +1,11 @@
+(library
+  (name libs)
+  (public_name aaa528_hw3.lib)
+  (libraries
+    core
+  ))
+
+(menhir
+    (modules parser))
+    
+(ocamllex lexer)
