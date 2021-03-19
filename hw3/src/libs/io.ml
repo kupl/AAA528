@@ -22,14 +22,15 @@ module Input = struct
   end
 
   let read : unit -> t
-  = fun () -> begin
+  = let open Utils in
+    fun () -> begin
     (* read function start *)
-    let args = Utils.Args.read () in
+    let args = Args.read () in
     let in_c = Stdlib.open_in args.inputFile in
     let lexbuf = Lexing.from_channel in_c in
     try
       let res = Parser.start Lexer.next_token lexbuf in
-      close_in in_c; res
+      close_in in_c; Timer.create (args.totalTimeout); res
     with
     | Lexer.LexingError msg -> (
       close_in in_c;

@@ -36,9 +36,9 @@ module Setting = struct
     ("--verbose",       (Arg.Set verbose), 
                         "Verbose log module");
     ("--z3-timeout",    (Arg.Int (fun d -> z3Timeout := d)), 
-                        "Timebudget for Z3 solver");
+                        "Timebudget for Z3 solver - default - 30s");
     ("--total-timeout", (Arg.Int (fun d -> totalTimeout := d)), 
-                        "Timebudget for program (if time is over, the program will be halt)");
+                        "Timebudget for program (if time is over, the program will be halt) - default: 180s");
     ("--partial",       (Arg.Unit (fun () -> total := false; partial := true)), 
                         "Flag for partial correctness verification");
     ("--total",         (Arg.Unit (fun () -> partial := false; total := true)), 
@@ -67,9 +67,10 @@ module Setting = struct
     end in
     fun () -> begin
     (* validate_arg function start *)
-    if not (file_exists !inputFile) then invalid_arg "invalid input" else
-    if !partial && !total then invalid_arg "invalid flag for partial and total correctness verification" else
-    if not (!partial || !total) then invalid_arg "invalid flag for partial and total correctness verification" else
+    if not (file_exists !inputFile) then  Stdlib.invalid_arg "invalid input" else
+    if !partial && !total then            Stdlib.invalid_arg "invalid flag for partial and total correctness verification" else
+    if not (!partial || !total) then      Stdlib.invalid_arg "invalid flag for partial and total correctness verification" else
+    if !z3Timeout > !totalTimeout then    Stdlib.invalid_arg "invalid timebudget - z3 timebudget should be less than total timebudget" else
     ()
     (* validate_arg function end *)
   end
