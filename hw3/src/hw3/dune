@@ -6,4 +6,5 @@
     core
     aaa528_hw3.lib
     aaa528_hw3.utils
-  ))
+  )
+  (flags -w -a))
