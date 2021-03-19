@@ -40,7 +40,7 @@ module Setting = struct
     ("--input",         (Arg.String (fun s -> inputFile := s)), 
                         "File path for input simple c program");
     ("--verbose",       (Arg.Set verbose), 
-                        "Verbose log module");
+                        "Verbose log mode");
     ("--z3-timeout",    (Arg.Int (fun d -> z3Timeout := d)), 
                         "Timebudget for Z3 solver - default - 30s");
     ("--total-timeout", (Arg.Int (fun d -> totalTimeout := d)), 
