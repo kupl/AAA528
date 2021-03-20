@@ -66,19 +66,23 @@ When you need to log the state, please using log module [`Utils.Log`](./utils/lo
 ``` ocaml
 (* Log Level: Application *)
 # Utils.Log.app (fun m -> m "%d: %s level logging." 1 "Application")
---> "1: Application level logging." (* Print just formatted string to STDOUT *)
+- : string = "1: Application level logging." 
+             (* Print just formatted string to STDOUT *)
 
 (* Log Level: Infomation *)
 # Utils.Log.info (fun m -> m "%d: %s level logging" 2 "Information")
---> "[INFO][+000001ms] 2: Application level logging." (* Print formatted string with tag to STDERR when verbose module *)
+- : string = "[INFO][+000001ms] 2: Application level logging."
+             (* Print formatted string with tag to STDERR when verbose module *)
 
 (* Log Level: Warning *)
 # Utils.Log.warn (fun m -> m "%d: %s level logging" 3 "Warning")
---> "[WARN][+000001ms] 3: Warning level logging." (* Print formatted string with tag to STDERR *)
+- : string = "[WARN][+000001ms] 3: Warning level logging."
+             (* Print formatted string with tag to STDERR *)
 
 (* Log Level: Error *)
 # Utils.Log.err (fun m -> m "%d: %s level logging" 4 "Error")
---> "[ERROR][+000001ms] 4: Error level logging." (* Print formatted string with tag to STDERR *)
+- : string = "[ERROR][+000001ms] 4: Error level logging."
+             (* Print formatted string with tag to STDERR *)
 ```
 
 ## Reference
