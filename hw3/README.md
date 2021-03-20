@@ -73,11 +73,11 @@ When you need to log the state, please using log module [`Utils.Log`](./utils/lo
 --> "[INFO][+000001ms] 2: Application level logging." (* Print formatted string with tag to STDERR when verbose module *)
 
 (* Log Level: Warning *)
-# Utils.Log.info (fun m -> m "%d: %s level logging" 3 "Warning")
+# Utils.Log.warn (fun m -> m "%d: %s level logging" 3 "Warning")
 --> "[WARN][+000001ms] 3: Warning level logging." (* Print formatted string with tag to STDERR *)
 
 (* Log Level: Error *)
-# Utils.Log.info (fun m -> m "%d: %s level logging" 4 "Error")
+# Utils.Log.err (fun m -> m "%d: %s level logging" 4 "Error")
 --> "[ERROR][+000001ms] 4: Error level logging." (* Print formatted string with tag to STDERR *)
 ```
 
