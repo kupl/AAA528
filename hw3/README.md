@@ -15,8 +15,8 @@
 
 ## Target
 
-The implementation target is `[hw3.ml](./src/hw3/hw3.ml)`.
-Verifier starts verification at the `[Hw3.verify](https://github.com/kupl/AAA528/blob/main/hw3/src/hw3/hw3.ml#L13)` function.
+The implementation target is [`hw3.ml`](./src/hw3/hw3.ml).
+Verifier starts verification at the [`Hw3.verify`](https://github.com/kupl/AAA528/blob/main/hw3/src/hw3/hw3.ml#L13) function.
 If you edit other files, please notify it in your submission.
 
 ### Benchmarks
@@ -61,7 +61,7 @@ Proved that the program is partially correct w.r.t. the pre/post conditions.
 
 ### Logging
 
-When you need to log the state, please using log module `[Utils.Log](./utils/log.ml)`.
+When you need to log the state, please using log module [`Utils.Log`](./utils/log.ml).
 
 ``` ocaml
 (* Log Level: Application *)
