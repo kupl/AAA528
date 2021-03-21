@@ -12,6 +12,7 @@
       - [Options](#options)
     - [Logging](#logging)
   - [Reference](#reference)
+  - [Contact](#contact)
 
 ## Target
 
@@ -67,12 +68,12 @@ When you need to log the state, please using log module [`Utils.Log`](./utils/lo
 (* Log Level: Application *)
 # Utils.Log.app (fun m -> m "%d: %s level logging." 1 "Application")
 - : string = "1: Application level logging." 
-             (* Print just formatted string to STDOUT *)
+             (* Print result of application to STDOUT *)
 
 (* Log Level: Infomation *)
 # Utils.Log.info (fun m -> m "%d: %s level logging" 2 "Information")
 - : string = "[INFO][+000001ms] 2: Application level logging."
-             (* Print formatted string with tag to STDERR when verbose module *)
+             (* Print formatted string with tag to STDERR when verbose mode *)
 
 (* Log Level: Warning *)
 # Utils.Log.warn (fun m -> m "%d: %s level logging" 3 "Warning")
@@ -88,3 +89,7 @@ When you need to log the state, please using log module [`Utils.Log`](./utils/lo
 ## Reference
 
 - [Z3 ML Documentation](https://z3prover.github.io/api/html/ml/Z3.html)
+
+## Contact
+
+If there is any problem or question, please contact to [TA](mailto:jormal@korea.edu).
