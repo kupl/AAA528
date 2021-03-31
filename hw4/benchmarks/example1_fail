@@ -1,0 +1,9 @@
+@pre true
+void f()  {
+  int i;
+  int[1000] a;
+  while (i < 1000) {
+    i++;
+  }
+  a[i] = 1; /* bug */
+}

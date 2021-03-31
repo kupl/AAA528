@@ -1,0 +1,12 @@
+@pre true
+void f (int x, int y) {
+  int[10] a;
+  int z;
+  z = 2 * y;
+  
+  if (z == x) {
+    if (x > y + 10) {
+      a[x] = 0; /* bug (e.g., x = 30, y = 15) */
+    }
+  }
+}

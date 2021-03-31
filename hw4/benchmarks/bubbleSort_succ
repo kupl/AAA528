@@ -1,0 +1,16 @@
+@pre true
+int[] BubbleSort(int[] arr_0) {
+  int[] arr := arr_0;
+  for (int i := |arr| - 1; i > 0; i := i - 1)
+  {
+    for (int j := 0; j < i; j := j + 1)
+    {
+      if (arr[j] > arr[j + 1]) {
+        int temp := arr[j]; /* safe */
+        arr[j] := arr[j + 1]; /* safe */
+        arr[j + 1] := temp; /* safe */
+      }
+    }
+  }
+  return arr;
+}

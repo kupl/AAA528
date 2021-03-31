@@ -1,0 +1,11 @@
+@pre true
+void f () {
+  int i;
+  int j;
+  int[100] a;
+  while (i < 100) {
+    i++;
+    j++;
+  }
+  a[j-1] = 0; /* safe */
+}

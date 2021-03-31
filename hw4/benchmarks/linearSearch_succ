@@ -1,0 +1,9 @@
+@pre 0 <= l && u < |a|
+bool LinearSearch(int[] a, int l, int u, int e) {
+  for (int i := l; i <= u; i := i + 1)
+  {
+    if (a[i] == e) /* safe: no overflow */
+      return true;
+  }
+  return false;
+}
