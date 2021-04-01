@@ -1,0 +1,13 @@
+(lang dune 2.4)
+
+(using menhir 2.1)
+
+(name aaa528_hw4)
+
+(package
+  (name aaa528_hw4)
+  (depends
+    (dune :build)
+    (menhir :build)
+    (core :build)
+    (z3 :build)))
