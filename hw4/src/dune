@@ -1,0 +1,9 @@
+(executable
+  (name main)
+  (public_name aaa528_hw4)
+  (libraries
+    aaa528_hw4.lib
+    aaa528_hw4.utils
+    aaa528_hw4.hw4
+  )
+  (package aaa528_hw4))
