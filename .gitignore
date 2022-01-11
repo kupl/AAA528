@@ -10,3 +10,6 @@ _build
 
 # Vagrant Configuration
 .vagrant/
+
+# Assignments
+students/
