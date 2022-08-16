@@ -9,7 +9,7 @@ int[] InsertionSort(int[] a_0) {
     int t := a[i];
     int j;
     for
-      @L2: 1 <= i && i <= |a| && -1 <= j && j <= i - 1 && forall k. (j < k && k < i -> a[k] > t) && sorted (a, 0, i - 1)
+      @L2: 1 <= i && i < |a| && -1 <= j && j <= i - 1 && forall k. (j < k && k < i -> a[k] > t) && sorted (a, 0, i - 1)
       (j := i - 1; j >= 0; j := j - 1)
     {
       if (a[j] <= t) break;
